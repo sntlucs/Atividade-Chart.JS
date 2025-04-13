@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gráficos com Chart.js</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+        background-color: rgb(40, 40, 40);
+        color: aliceblue;
+    }
+    .container {
+      width: 80%;
+      margin: 30px auto;
+      text-align: center;
+      color: rgb(240, 248, 255);
+    }
+
+    canvas {    
+    width: 1000px;
+    height: 600px;
+    margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Gráfico de Linhas</h1>
+    <canvas id="lineChart"></canvas>
+
+    <h1>Gráfico de Barras</h1>
+    <canvas id="barChart"></canvas>
+  </div>
+
+  <script>
+    const lineCtx = document.getElementById('lineChart').getContext('2d');
+
+    const lineData = {
+      labels: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
+      datasets: [
+        {
+          label: 'Temperatura (°C)',
+          data: [30, 29, 28, 25, 24, 23],
+          borderColor: 'red',
+          backgroundColor: 'rgba(255, 0, 0, 0.2)',
+          fill: false,
+          tension: 0.1
+        },
+        {
+          label: 'Umidade (%)',
+          data: [80, 82, 85, 81, 80, 83],
+          borderColor: 'blue',
+          backgroundColor: 'rgba(0, 0, 255, 0.2)',
+          fill: false,
+          tension: 0.1
+        }
+      ]
+    };
+
+    const lineConfig = {
+      type: 'line',
+      data: lineData,
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              color: "#e0e0e0"
+            }
+          }
+        }
+      }
+    };
+
+    const lineChart = new Chart(lineCtx, lineConfig);
+
+    const barCtx = document.getElementById('barChart').getContext('2d');
+
+    const barData = {
+      labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+      datasets: [
+        {
+          label: 'Temperatura Média (°C)',
+          data: [22, 24, 27, 23, 20, 18],
+          backgroundColor: 'rgba(255, 99, 132, 0.6)'
+        },
+        {
+          label: 'Umidade Média (%)',
+          data: [90, 89, 93, 82, 87, 82],
+          backgroundColor: 'rgba(54, 162, 235, 0.6)'
+        }
+      ]
+    };
+
+    const barConfig = {
+      type: 'bar',
+      data: barData,
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            ticks: {
+              color: "#e0e0e0"
+            }
+          }
+        }
+      }
+    };
+
+    const barChart = new Chart(barCtx, barConfig);
+  </script>
+</body>
+</html>
